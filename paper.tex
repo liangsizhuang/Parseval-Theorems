@@ -1,0 +1,299 @@
+\documentclass[journal,twoside]{IEEEtran}
+
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
+\usepackage[cmex10]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\interdisplaylinepenalty=2500
+
+\newcommand{\dd}{\,\mathrm{d}}
+\usepackage{cite}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\sinc}{sinc}
+
+\begin{document}
+
+\title{Parseval's Theorem and Power Spectral Density}
+
+\author{Sizhuang~Liang}
+
+\maketitle
+
+\begin{abstract}
+
+This paper is a continuation of ``Analysis of Relationship between Continuous Time Fourier Transform (CTFT), Discrete Time Fourier
+Transform (DTFT), Fourier Series (FS), and Discrete Fourier Transform (DFT)''. In this paper, we review the Parseval's theorem for CTFT, DTFT, FS, and DFT. We then explore the relationship between the Parseval's theorem, energy spectral density, and power spectrum. A power spectral density is the continuous form of a power spectrum. In the end of the paper, we introduce the equivalent noise power spectral density, which is an interpolation of a power spectrum.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Parseval's Theorem, instantaneous power, energy, average power, energy spectral density, power spectrum, power spectral density, equivalent noise power spectral density, equivalent noise bandwidth
+\end{IEEEkeywords}
+
+\section{Parseval's Theorem}
+
+\subsection{Parseval's Theorem for CTFT}
+
+For a continuous-time signal $x(t), t\in\mathbb{R}$, we have
+\begin{equation}
+\int_{-\infty}^{\infty}|x(t)|^2\dd t = \int_{-\infty}^{\infty}|X(f)|^2\dd f,\label{eqn:parseval_CTFT}
+\end{equation}
+where $X(f)$ is the Continuous-Time Fourier Transform (CTFT) of $x(t)$ with the ordinary frequency convention.
+
+\subsection{Parseval's Theorem for DTFT}
+
+For a discrete-time signal $x[n], n\in\mathbb{Z}$, we have
+\begin{equation}
+\sum_{n=-\infty}^{\infty}|x[n]|^2 = \int_{0}^{1}|X(e^{j 2 \pi \hat{f}})|^2\dd \hat{f},\label{eqn:parseval_DTFT}
+\end{equation}
+where $X(e^{j 2 \pi \hat{f}})$ is the Discrete-Time Fourier Transform (DTFT) of $x[n]$ with the ordinary normalized frequency convention. Since $X(e^{j 2 \pi \hat{f}})$ is periodic with a period of $1$, the integration on the right hand side can be carried out on any interval that has a span of $1$.
+
+\subsection{Parseval's Theorem for FS}
+
+For a periodic continuous-time signal $x(t)$ with a period of $T$, we have
+\begin{equation}
+\frac{1}{T}\int_{0}^{T}|x(t)|^2\dd t = \sum_{k=-\infty}^{\infty}|c[k]|^2,\label{eqn:parseval_FS}
+\end{equation}
+where $c[k]$ is the Fourier Series (FS) of $x(t)$. The integration on the left hand side can be carried out on any interval that has a span of $T$.
+
+\subsection{Parseval's Theorem for DFT}
+
+For a periodic discrete-time signal $x[n]$ with a period of $N$, we have
+\begin{equation}
+\frac{1}{N}\sum_{n=0}^{N-1}|x[n]|^2 = \sum_{k=0}^{N-1}|X[k]|^2,\label{eqn:parseval_DFT}
+\end{equation}
+where $X[k]$ is the Discrete Fourier Transform (DFT) of $x[n]$. The summation on both sides can be carried out on any interval that has a span of $N$. The convention of DFT here is
+\begin{equation}
+X[k] = \frac{1}{N}\sum_{n=0}^{N-1}x[n]e^{-j 2\pi \frac{k}{N} n}.\label{def:DFT_conv2}
+\end{equation}
+
+
+
+
+
+\section{Instantaneous Power}
+
+\subsection{Continuous-Time Signals}
+
+The instantaneous power of a continuous-time signal $x(t)$ at time $t$ is defined to be
+\begin{equation}
+P(t) = |x(t)|^2.
+\end{equation} 
+
+\subsection{Discrete-Time Signals}
+
+The instantaneous power of a discrete-time signal $x[n]$ at time index $n$ is defined to be
+\begin{equation}
+P[n] = |x[n]|^2.
+\end{equation}
+
+\subsection{Relationship Analysis}
+
+If $x[n]$ is obtained by sampling $x(t)$ with a sampling interval of $\Delta t$, we have
+\begin{equation}
+P[n] = |x[n]|^2 = |x(n \Delta t)|^2 = P(n \Delta t).
+\end{equation}
+This means that $P[n]$ can be viewed as samples of $P(t)$ with the same sampling interval.
+
+
+
+
+
+\section{Energy}
+
+\subsection{Continuous-Time Signals}
+
+The energy of a continuous-time signal $x(t)$ is defined by
+\begin{equation}
+E = \int_{-\infty}^{\infty}|x(t)|^2\dd t.
+\end{equation}
+According to the Parseval's theorem for CTFT, we have
+\begin{equation}
+E = \int_{-\infty}^{\infty}|X(f)|^2\dd f.
+\end{equation}
+As a result, $|X(f)|^2$ is defined as the Energy Spectral Density (ESD) of $x(t)$. In other words, we have
+\begin{equation}
+\mathrm{ESD}(f) = |X(f)|^2.
+\end{equation}
+To obtain the energy of $x(t)$, we simply integrate its ESD over the entire frequency range. We have
+\begin{equation}
+E = \int_{-\infty}^{\infty}\mathrm{ESD}(f)\dd f.
+\end{equation}
+
+\subsection{Discrete-Time Signals}
+
+The energy of a discrete-time signal $x[n]$ is defined by
+\begin{equation}
+E = \sum_{n = -\infty}^{\infty}|x[n]|^2.
+\end{equation}
+According to the Parseval's theorem for DTFT, we have
+\begin{equation}
+E = \int_{0}^{1}|X(e^{j 2 \pi \hat{f}})|^2\dd \hat{f}.
+\end{equation}
+As a result, $|X(e^{j 2 \pi \hat{f}})|^2$ is defined as the Energy Spectral Density (ESD) of $x[n]$. In other words, we have
+\begin{equation}
+\mathrm{ESD}(\hat{f}) = |X(e^{j 2 \pi \hat{f}})|^2.
+\end{equation}
+To obtain the energy of $x[n]$, we can integrate its ESD over one period, such as $[0, 1)$. We have
+\begin{equation}
+E = \int_{0}^{1}\mathrm{ESD}(\hat{f})\dd \hat{f}.
+\end{equation}
+
+\subsection{Relationship Analysis}
+
+If $x[n]$ is obtained by sampling $x(t)$ with a sampling interval of $\Delta t$, we have
+\begin{equation}
+\int_{-\infty}^{\infty}|x(t)|^2\dd t \approx \sum_{n=-\infty}^{\infty}|x(n \Delta t)|^2\Delta t = \Delta t \sum_{n=-\infty}^{\infty}|x[n]|^2.
+\end{equation}
+This equation means that the energy for a discrete-time signal is very different from the energy for a continuous-time signal.
+
+
+
+
+
+\section{Power}
+ 
+\subsection{Continuous-Time Signals}
+
+The power of a continuous-time signal $x(t)$ is defined by
+\begin{equation}
+P = \lim_{\substack{a\rightarrow -\infty\\b\rightarrow \infty}}\frac{1}{b-a}\int_{a}^{b}|x(t)|^2\dd t.
+\end{equation}
+
+\subsection{Periodic Continuous-Time Signals}
+
+For a periodic continuous-time signal $x(t)$ with a period of $T$, we have
+\begin{equation}
+P = \frac{1}{T}\int_{0}^{T}|x(t)|^2\dd t,
+\end{equation}
+where the integration can be carried out on any interval with a span of $T$. The proof is not shown here. As an example, let us consider the signal $x(t) = A \sin(2 \pi f t + \varphi)$. We have
+\begin{multline}
+\frac{1}{b-a}\int_{a}^{b}|A \sin(2 \pi f t + \varphi)|^2\dd t = \\
+\qquad \frac{A^2}{2}+\frac{A^2}{8 \pi f (b-a)}(\sin(4 \pi f a + 2 \varphi) - \sin(4 \pi f b + 2 \varphi)).
+\end{multline}
+As a result, we have
+\begin{equation}
+\lim_{\substack{a\rightarrow -\infty\\b\rightarrow \infty}}\frac{1}{b-a}\int_{a}^{b}|A \sin(2 \pi f t + \varphi)|^2\dd t = \frac{A^2}{2}.
+\end{equation}
+Meanwhile, we have
+\begin{equation}
+\frac{1}{T}\int_{0}^{T}|A \sin(2 \pi f t + \varphi)|^2\dd t = \frac{A^2}{2}.
+\end{equation}
+
+For a periodic continuous-time signal $x(t)$ with a period of $T$, according to the Parseval's theorem for FS, we have
+\begin{equation}
+P = \sum_{k=-\infty}^{\infty}|c[k]|^2.
+\end{equation}
+As a result, $|c[k]|^2$ is defined as the Power Spectrum (PS) of $x(t)$. In other words, we have
+\begin{equation}
+\mathrm{PS}[k] = |c[k]|^2.
+\end{equation}
+The index $k$ corresponds to a frequency of $f_{k} = k/T$. To obtain the power of $x(t)$, we simply sum its PS over the entire (discrete) frequency range. We have
+\begin{equation}
+P = \sum_{k=-\infty}^{\infty} \mathrm{PS}[k].
+\end{equation}
+It should be emphasized that the power spectrum of $x(t)$ is a discrete-argument sequence. Its sampling interval is $1/T$. It has a continuous form, and its continuous form is called the Power Spectral Density (PSD). We have
+\begin{equation}
+\mathrm{PSD}(f) = \sum_{k=-\infty}^{\infty} |c[k]|^2 \delta \left( f - \frac{k}{T} \right).\label{eqn:PSD_f_def}
+\end{equation}
+To obtain the power of $x(t)$, we have
+\begin{equation}
+P = \int_{-\infty}^{\infty} \mathrm{PSD}(f) \dd f.\label{eqn:PSD_f_to_P}
+\end{equation}
+
+\subsection{Discrete-Time Signals}
+
+The power of a discrete-time signal $x[n]$ is defined by
+\begin{equation}
+P = \lim_{\substack{n_1\rightarrow -\infty\\n_2\rightarrow \infty}}\frac{1}{n_2-n_1+1}\sum_{n=n_1}^{n_2}|x[n]|^2.
+\end{equation}
+
+\subsection{Periodic Discrete-Time Signals}
+
+For a periodic discrete-time signal $x[n]$ with a period of $N$, we have
+\begin{equation}
+P = \frac{1}{N}\sum_{n=0}^{N-1}|x[n]|^2,
+\end{equation}
+where the summation can be carried out on any interval with a span of $N$. The proof is not shown here.
+
+For a periodic discrete-time signal $x[n]$ with a period of $N$, according to the Parseval's theorem for DFT, we have
+\begin{equation}
+P = \sum_{k=0}^{N-1}|X[k]|^2.
+\end{equation}
+As a result, $|X[k]|^2$ is defined as the Power Spectrum (PS) of $x[n]$. In other words, we have
+\begin{equation}
+\mathrm{PS}[k] = |X[k]|^2.
+\end{equation}
+The index $k$ corresponds to a normalized frequency of $\hat{f}_{k} = k/N$. To obtain the power of $x[n]$, we simply sum its PS over one period, such as $[0, N)$. We have
+\begin{equation}
+P = \sum_{k=0}^{N-1} \mathrm{PS}[k].
+\end{equation}
+It should be emphasized that the power spectrum of $x[t]$ is a discrete-argument sequence. Its sampling interval is $1/N$. It has a continuous form, and its continuous form is called the Power Spectral Density (PSD). We have
+\begin{equation}
+\mathrm{PSD}(\hat{f}) = \sum_{k=-\infty}^{\infty} |X[k]|^2 \delta \left( \hat{f} - \frac{k}{N} \right).\label{eqn:PSD_hatf_def}
+\end{equation}
+To obtain the power of $x[n]$, we have
+\begin{equation}
+P = \int_{0}^{1} \mathrm{PSD}(\hat{f}) \dd \hat{f}.\label{eqn:PSD_hatf_to_P}
+\end{equation}
+
+\subsection{Relationship Analysis}
+
+If $x[n]$ and $x(t)$ are both periodic and $x[n]$ is obtained by sampling $x(t)$ with a sampling interval of $\Delta t$, we have
+\begin{equation}
+\frac{1}{T}\int_{0}^{T}|x(t)|^2\dd t \approx \frac{1}{T}\sum_{n=0}^{N-1}|x(n \Delta t)|^2\Delta t = \frac{1}{N} \sum_{n=0}^{N-1}|x[n]|^2.
+\end{equation}
+This equation means that the power for $x[n]$ is an approximation to the power for $x(t)$. 
+
+
+
+
+\section{Equivalent Noise Power Spectral Density}
+
+\subsection{Noises and Their PSDs}
+
+A noise can be viewed as a periodic signal with $T\rightarrow \infty$. According to Eq. (\ref{eqn:PSD_f_def}), the interval between two spectral lines should approach zero. If the power of the noise is well defined, Eq. (\ref{eqn:PSD_f_to_P}) might converge. This indicates that the power spectral density of a noise might be a non-discrete continuous argument function. For this reason, a non-discrete power spectral density is considered a power spectral density for a noise.
+
+\subsection{Continuous-Time Signals}
+
+Eq. (\ref{eqn:PSD_f_def}) is a discrete continuous-argument function. We want to transform the function into a non-discrete continuous-argument function with Eq. (\ref{eqn:PSD_f_to_P}) preserved. Such a transformed function is called an Equivalent Noise Power Spectral Density (ENPSD) of $x(t)$. One possible ENPSD is
+\begin{equation}
+\mathrm{ENPSD}(f) = \sum_{k=-\infty}^{\infty} T |c[k]|^2 \Pi (T f - k).
+\end{equation}
+The equivalent noise band width is defined to be
+\begin{equation}
+\mathrm{ENBW} = \frac{\int_{-\infty}^{\infty}\mathrm{ENPSD}(f)\dd f}{\mathrm{ENPSD}(0)}.
+\end{equation}
+After some manipulation, we can prove that
+\begin{equation}
+\mathrm{ENBW} = \frac{\int_{0}^{T}|x(t)|^2\dd t}{\lvert \int_{0}^{T}x(t)\dd t \rvert^2}.
+\end{equation}
+
+\subsection{Discrete-Time Signals}
+
+Eq. (\ref{eqn:PSD_hatf_def}) is a discrete continuous-argument function. We want to transform the function into an ordinary continuous-argument function with Eq. (\ref{eqn:PSD_hatf_to_P}) preserved. Such a transformed function is called an Equivalent Noise Power Spectral Density (ENPSD) of $x[n]$. One possible ENPSD is
+\begin{equation}
+\mathrm{ENPSD}(\hat{f}) = \sum_{k=-\infty}^{\infty} N |X[k]|^2 \Pi (N \hat{f} - k).
+\end{equation}
+The equivalent noise band width is defined to be
+\begin{equation}
+\mathrm{ENBW} = \frac{\int_{0}^{1}\mathrm{ENPSD}(\hat{f})\dd \hat{f}}{\mathrm{ENPSD}(0)}.
+\end{equation}
+After some manipulation, we can prove that
+\begin{equation}
+\mathrm{ENBW} = \frac{\sum_{n=0}^{N-1}|x[n]|^2}{\lvert \sum_{n=0}^{N-1}x[n] \rvert^2}.
+\end{equation}
+
+\subsection{Relationship Analysis}
+
+If $x[n]$ is obtained by sampling $x(t)$ with a sampling interval of $\Delta t$, we have
+\begin{equation}
+\frac{\int_{0}^{T}|x(t)|^2\dd t}{\lvert \int_{0}^{T}x(t)\dd t \rvert^2} \approx \frac{\sum_{n=0}^{N-1}|x(n \Delta t)|^2 \Delta t}{\lvert \sum_{n=0}^{N-1}x(n\Delta t)\Delta t \rvert^2} = f_{s} \frac{\sum_{n=0}^{N-1}|x[n]|^2}{\lvert \sum_{n=0}^{N-1}x[n] \rvert^2},
+\end{equation}
+where $f_{s} = 1/\Delta t$ is the sampling frequency. This equation means that the ENBW of $x(t)$ is equal to the ENBW of $x[n]$ multiplied by $f_s$.
+
+\end{document}
